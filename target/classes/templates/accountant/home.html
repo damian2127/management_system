@@ -1,0 +1,55 @@
+
+<div lang="en" th:replace="layout/header"> </div>
+
+<div class="container-fluid " >
+    <div class="row">
+
+        <!-- ASIDE - LEFT PANEL -->
+        <div class="col-sm-12 col-md-3 col-lg-3 aside">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/accountant/home">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Panel księgowej</li>
+                </ol>
+            </nav>
+
+            <div class="list-group-flush">
+                <a href="/accountant/home" class="list-group-item list-group-item-action active">Panel</a>
+                <a href="/accountant/list_items" class="list-group-item list-group-item-action">Usługi</a>
+                <a href="/accountant/add_item" class="list-group-item list-group-item-action">Dodaj usługę</a>
+            </div>
+
+            <div class="aside__currentUser">
+
+                <p>Zalogowany jako:	<span class="badge badge-primary" th:utext="${userName}"></span></p>
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
+                </form>
+            </div>
+        </div><!--/ ASIDE - LEFT PANEL -->
+
+        <!-- CONTENT - RIGHT PANEL -->
+        <div class="col-sm-12 col-md-9 col-lg-9 content">
+            <h1> PANEL KSIĘGOWEJ</h1>
+
+            <div class="card text-center border-light mt-3 mb-3">
+                <div class="card-header">
+                    Powiadomienia
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Witaj  <b th:utext="${userName}"></b> !</h4>
+                    <p class="card-text lead"> W panelu tym możesz dodawać, modyfikować usługi oraz generować raporty PDF wybranych spraw</p>
+                    <a href="/accountant/add_item" class="btn btn-primary">Dodaj usługę</a>
+                </div>
+            </div>
+        </div><!--/ CONTENT - RIGHT PANEL -->
+
+
+
+    </div>
+</div>
+
+<div lang="en" th:replace="layout/footer :: footer"> </div>
+
+</body>
+</html>
