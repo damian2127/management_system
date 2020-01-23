@@ -34,18 +34,22 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Lastname</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Modify</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr th:each="user: ${listOfUser}">
+                        <td th:text="${user.id}"></td>
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.lastName}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.RoleId}"></td>
+                        <td><a href="#" th:href="@{|edit/${user.id}|}">Modify</a></td>
                     </tr>
                 </tbody>
             </table>
