@@ -1,0 +1,79 @@
+
+<div lang="en" th:replace="layout/header"> </div>
+
+<div class="container-fluid " >
+    <div class="row">
+
+        <!-- ASIDE - LEFT PANEL -->
+        <div class="col-sm-12 col-md-3 col-lg-3 aside">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/recorder/home">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Panel rejestratora</li>
+                </ol>
+            </nav>
+
+            <div class="list-group-flush">
+                <a href="/recorder/home" class="list-group-item list-group-item-action ">Panel</a>
+                <a href="/recorder/add_case" class="list-group-item list-group-item-action active">Dodaj sprawe</a>
+                <a href="#" class="list-group-item list-group-item-action">Kalendarz</a>
+                <a href="#" class="list-group-item list-group-item-action">Klienci</a>
+                <a href="/recorder/cases" class="list-group-item list-group-item-action">Sprawy</a>
+            </div>
+
+            <div class="aside__currentUser">
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
+                </form>
+            </div>
+        </div><!--/ ASIDE - LEFT PANEL -->
+        <!-- CONTENT - RIGHT PANEL -->
+        <div class="col-sm-12 col-md-9 col-lg-9 content">
+            <h1> Dodaj sprawe </h1>
+
+
+        <!-- FORM -->
+        <div class="col-md-12 col-md-offset-3">
+            <form autocomplete="off"  th:action="@{/recorder/add_case}"  th:object="${item}"
+                  method="post" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="${item.getCaseId()}" placeholder="Nazwa" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-sm-12 col-md-6 form-group">
+                        <label for="case-date">Data</label>
+                        <input class="form-control"  id="case-date" type="date">
+                    </div>
+                    <div class="col-sm-12 col-md-6 form-group">
+                        <label for="case-time">Godzina</label>
+                        <input class="form-control"  id="case-time" type="time">
+                    </div>
+                </div>
+
+                <div class="form-row form-group">
+                    <label for="case-description">Opis sprawy</label>
+                    <textarea class="form-control" id="case-description" rows="4"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <button class="btn btn-primary" type="submit">Dodaj</button>
+                </div>
+
+            </form>
+
+
+
+        </div><!--/ CONTENT - RIGHT PANEL -->
+
+
+
+    </div>
+</div>
+
+<div lang="en" th:replace="layout/footer :: footer"> </div>
+
+</body>
+</html>
