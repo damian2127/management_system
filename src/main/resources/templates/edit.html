@@ -27,34 +27,17 @@
         <!-- CONTENT - RIGHT PANEL -->
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <h1> PANEL ADMINISTRATORA</h1>
-            <div class="panel-group" style="margin-top:40px">
-                <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-            </div>
 
-            <!--lista userow oraz form dodawanie-edytowanie-->
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>Email</th>
-                    <th>Rola</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="user: ${listOfUser}">
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.name}"></td>
-                        <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${user.RoleId}"></td>
-                        <td><a href="#" th:href="@{|edit/${user.id}|}">Modyfikuj</a></td>
-                        <td><a href="#" th:href="@{|delete/${user.id}|}">Usuń</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <form action="#" method="POST" th:action="@{/admin/edit/}+@{user.id}" th:object="${user}">
+                <input type="hidden" th:field="*{id}">
+                <input type="text" th:field="*{name}" placeholder="Name">
+                <input type="text" th:field="*{lastName}" placeholder="Last Name">
+                <input type="text" th:field="*{email}" placeholder="Email">
+                <!--<input type="text" th:field="*{RoleId}" placeholder="Role">-->
+                <input type="text" th:field="*{RoleId}" placeholder="Role" placeholder="RoleId">
+                <input type="hidden" th:field="*{password}" placeholder="password">
+                <input type="submit" th:field="*{name}" placeholder="Update">
+            </form>
         </div><!--/ CONTENT - RIGHT PANEL -->
 
     </div>

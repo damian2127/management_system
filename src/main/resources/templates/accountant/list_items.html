@@ -1,5 +1,5 @@
-
-<div lang="en" th:replace="layout/header"> </div>
+<div lang="en" th:replace="layout/header" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"> </div>
 
 <div class="container-fluid " >
     <div class="row">
@@ -14,29 +14,38 @@
             </nav>
 
             <div class="list-group-flush">
-                <a href="/accountant/home" class="list-group-item list-group-item-action active">Panel</a>
-                <a href="/accountant/list_items" class="list-group-item list-group-item-action">Usługi</a>
+                <a href="/accountant/home" class="list-group-item list-group-item-action">Panel</a>
+                <a href="/accountant/list_items" class="list-group-item list-group-item-action active">Usługi</a>
                 <a href="/accountant/add_item" class="list-group-item list-group-item-action">Dodaj usługę</a>
                 <a href="#" class="list-group-item list-group-item-action">Ustawienia</a>
             </div>
 
-            <div class="aside__currentUser">
-                <p>Zalogowany jako:	<span class="badge badge-primary" th:utext="${userName}"></span></p>
-                <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
-                </form>
-            </div>
         </div><!--/ ASIDE - LEFT PANEL -->
 
         <!-- CONTENT - RIGHT PANEL -->
         <div class="col-sm-12 col-md-9 col-lg-9 content">
-            <h1> ACCOUNTANT PANEL</h1>
+            <h1> PANEL KSIĘGOWEJ</h1>
             <div class="panel-group" style="margin-top:40px">
                 <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
             </div>
+
+            <!--lista userow oraz form dodawanie-edytowanie-->
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Nazwa usługi</th>
+                    <th>Cena</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="service: ${listOfItems}">
+                    <td th:text="${service.i_name}"></td>
+                    <td th:text="${service.i_price}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div><!--/ CONTENT - RIGHT PANEL -->
-
-
 
     </div>
 </div>
