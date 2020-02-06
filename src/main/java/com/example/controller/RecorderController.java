@@ -99,6 +99,12 @@ public class RecorderController {
     @RequestMapping(value ="/cases",method = RequestMethod.GET)
     public ModelAndView list_cases(){
         ModelAndView view = new ModelAndView();
+
+        // LOGIN
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        view.addObject("userName", user.getName() + " " + user.getLastName());
+
         List<Case> listOfCases = caseService.getAll();
         view.addObject("listOfCases", listOfCases);
         view.setViewName("/recorder/cases");
@@ -109,7 +115,19 @@ public class RecorderController {
     @RequestMapping(value="/client_show/{id}/add_case", method = RequestMethod.GET)
     public ModelAndView add_ClientCase(@PathVariable Integer id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("case", new Case());
+        Client client = clientService.findById(id);
+
+        Case newCase = new Case();
+        newCase.setClientName(client.getC_name());
+        newCase.setClientSurname(client.getC_surname());
+
+        // LOGIN
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+
+        modelAndView.addObject("client", client);
+        modelAndView.addObject("case", newCase);
         modelAndView.setViewName("/recorder/add_case");
         return modelAndView;
     }
@@ -130,9 +148,13 @@ public class RecorderController {
             modelAndView.setViewName("recorder/add_case");
         } else {
             caseService.saveCase(item);
-            modelAndView.addObject("successMessage", "Dodano nową sprawe");
-            modelAndView.addObject("item", new Case());
-            modelAndView.setViewName("recorder/add_case");
+           /* modelAndView.addObject("successMessage", "Dodano nową sprawe");
+            modelAndView.addObject("item", new Case());*/
+
+            List<Case> listOfCases = caseService.getAll();
+            modelAndView.addObject("listOfCases", listOfCases);
+            modelAndView.setViewName("/recorder/cases");
+
         }
         return modelAndView;
     }

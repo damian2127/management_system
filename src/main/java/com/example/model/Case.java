@@ -57,9 +57,20 @@ public class Case {
     @NotEmpty(message = "*Podaj opis sprawy")
     public String caseNote;
 
-    @Column(name="`case_price`")
-    @NotNull(message = "*Podaj cenę")
-    public BigDecimal casePrice;
+    public static Comparator<Case> getComparator() {
+        return new Comparator<Case>(){
+            @Override
+            public int compare(Case c1, Case c2)
+            {
+                String c1Date = c1.getCaseDate();
+                String c2Date = c2.getCaseDate();
+                if (c1Date.equals(c2Date)) {
+                    return c1.getCaseTime().compareTo(c2.getCaseTime());
+                }
+                return c1Date.compareTo(c2Date);
+            }
+        };
+    }
 
     public Long getCaseId() {
         return id;
@@ -123,28 +134,5 @@ public class Case {
 
     public void setCaseNote(String caseNote) {
         this.caseNote = caseNote;
-    }
-
-    public BigDecimal getCasePrice() {
-        return casePrice;
-    }
-
-    public void setCasePrice(BigDecimal casePrice) {
-        this.casePrice = casePrice;
-    }
-
-    public static Comparator<Case> getComparator() {
-        return new Comparator<Case>(){
-            @Override
-            public int compare(Case c1, Case c2)
-            {
-                String c1Date = c1.getCaseDate();
-                String c2Date = c2.getCaseDate();
-                if (c1Date.equals(c2Date)) {
-                    return c1.getCaseTime().compareTo(c2.getCaseTime());
-                }
-                return c1Date.compareTo(c2Date);
-            }
-        };
     }
 }
